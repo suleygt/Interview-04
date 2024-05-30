@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+  
+  
+   .container {
+    display: inline;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        background-color: #9f5050;
+       
+   }
+   body {
+    background-color: #9f5050;
+    width: %50;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    margin-top: 200px;
+   }
+
+   div{
+   display: flex;
+    margin: 53px;
+    padding: 1px;
+    text-align: center;
+    text-decoration: underline;
+    font-size: 23px;
+    width: 90%;
+    height: 115%;
+    border: 2px solid #9ff5;
+    border-radius: 5px;
+    background-color: #9ff5;
+     }
