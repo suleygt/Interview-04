@@ -1,6 +1,6 @@
 import React, {  createContext, useContext, useEffect, useState } from "react";
 
-const UserConext = createContext();
+const UserContext = createContext();
 
 const App = () =>  {
   const [userState, setUserState] = useState({
@@ -25,27 +25,56 @@ const App = () =>  {
   }, [userState]);
 
   return (
-    <UserConext.Provider value={{ userState, setUserState}}>
+   <UserContext.Provider value={{ userState, setUserState}}>
       <UserList />
-    </UserConext.Provider>
+    </UserContext.Provider>
   );
 
   // KODUNUZ BURAYA GELECEK
 };
 
 const UserList = () => {
-  const { userState } = useContext(UserConext);
+  const { userState, setUserState } = useContext(UserContext);
 
-  return (
-    <div>
-      {Object.keys(userState).map(([user, isOnline]) => (
-        <div key={user}>
-        {user}: {isOnline ? "🟢" : "🔴"}
-        </div>
-      ))}
-    </div>
-  );
-  // KODUNUZ BURAYA GELECEK
+  const handleMouseEnter = (name) => {
+    setUserState(prevState => ({
+        ...prevState,
+        [name]: true
+    }));
 };
+
+const handleMouseLeave = (name) => {
+    setUserState(prevState => ({
+        ...prevState,
+        [name]: false
+    }));
+};
+
+
+return (
+  <div className="user-list">
+    <h2 className="user-list-title">User List</h2>
+      {Object.entries(userState).map(([name, isOnline]) => (
+          <div
+              key={name}
+              className={`user-item ${isOnline ? "online" : "offline"}`}
+              onMouseEnter={() => handleMouseEnter(name)}
+              onMouseLeave={() => handleMouseLeave(name)}
+          >
+            <div className="status-icon">
+                        {isOnline ? "🟢" : "🔴"}
+                    </div><div className="name">{name}:</div>
+                   
+                    <div className="status-text">
+                         {isOnline ? "Online" : "Offline"}
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
+};
+
+  // KODUNUZ BURAYA GELECEK
+
 
 export default App;
